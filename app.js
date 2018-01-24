@@ -15,7 +15,11 @@ app.get('/redirect', function(request, response){
   response.redirect(301, '/surprise');
 });
 
-app.get('/', function(request, response){
+app.get('/surprise', function(request, response){
+   response.send("SURPRISE!!!");
+});
+
+app.get('/date', function(request, response){
     response.send(currentDate);
 });
 
