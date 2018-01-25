@@ -26,7 +26,7 @@ app.get('/date', function(request, response){
 app.use(express.static('public'));
 
 app.get('/cities', function(request, response){
-  var cities = ['Providence', 'Warwick', 'Pawtucket', 'Central Falls'];
+  var cities = ['Providence', 'Warwick', 'Pawtucket', 'Central Falls', 'Cumberland'];
   response.json(cities);
 });
 
