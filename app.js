@@ -7,17 +7,21 @@ var currentDate = new Date();
 //     response.send("Hello World");
 // });
 
-// app.get('/name', function(request, response) {
-//     response.send("Juan Montoya");
-// });
+app.get('/name', function(request, response) {
+    response.send("Juan Montoya");
+});
 
-// app.get('/redirect', function(request, response){
-//   response.redirect(301, '/surprise');
-// });
+app.get('/redirect', function(request, response){
+  response.redirect(301, '/surprise');
+});
 
-// app.get('/', function(request, response){
-//     response.send(currentDate);
-// });
+app.get('/surprise', function(request, response){
+    response.send("SURPRISE!!!");
+});
+
+app.get('/date', function(request, response){
+    response.send(currentDate);
+});
 
 app.use(express.static('public'));
 
@@ -26,8 +30,8 @@ app.get('/cities', function(request, response){
   response.json(cities);
 });
 
-// app.get('/index', function(request, response){
-//     response.send();
-// });
+app.get('/index', function(request, response){
+    response.send();
+});
 
 app.listen(portNum);
