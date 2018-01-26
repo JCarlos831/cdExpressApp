@@ -5,7 +5,7 @@ $(function(){
     function appendToList(cities){
         var list = [];
         for (var i in cities){
-            list.push($('<option>', {text: cities[i]}));
+            list.push($('<li>', {text: cities[i]}));
         }
         console.log(list);
         $('.cityList').append(list);

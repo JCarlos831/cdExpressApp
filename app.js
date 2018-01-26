@@ -1,43 +1,20 @@
 var express = require('express');
 var app = express();
 var portNum = process.env.PORT;
-var currentDate = new Date();
-
-// app.get('/', function(request, response) {
-//     response.send("Hello World");
-// });
-
-app.get('/name', function(request, response) {
-    response.send("Juan Montoya");
-});
-
-app.get('/redirect', function(request, response){
-  response.redirect(301, '/surprise');
-});
-
-app.get('/surprise', function(request, response){
-   response.send("SURPRISE!!!!");
-});
-
-app.get('/date', function(request, response){
-    response.send(currentDate);
-});
 
 app.use(express.static('public'));
 
-app.get('/cities', function(request, response){
-  var cities = ['Providence', 'Warwick', 'Pawtucket', 'Central Falls', 'Cumberland'];
-  if(request.query.limit >= 0){
-      response.json(cities.slice(0, request.query.limit));
-  } else {
-      response.json(cities);
-  }
+var cities = {
+      'Providence': 'Rhode Island',
+      'Boston': 'Massachusetts',
+      'Portland': 'Maine',
+      'San Diego': 'California',
+      'Houston' : 'Texas'
+  };
+  
+app.get('/cities/:name', function(request, response){
+    var description = cities[request.params.name];
+    response.json(description);
 });
-
-app.get('/index', function(request, response){
-    response.send();
-});
-
-
 
 app.listen(portNum);
