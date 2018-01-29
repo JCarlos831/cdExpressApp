@@ -14,6 +14,7 @@ $(function(){
         }).done(function(cityNameFixed){
         appendToList([cityNameFixed]);
         this.trigger('reset');
+        // Page adds city on submit after refresh only
         });
     });
     
