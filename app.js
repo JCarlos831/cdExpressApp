@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var portNum = process.env.PORT;
 var currentDate = new Date();
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 
@@ -12,6 +14,13 @@ var cities = {
     'San Diego': 'California',
     'Austin': 'Texas'
   };
+  
+app.post('/cities', parseUrlencoded, function(request, response){
+  var newCity = request.body;
+  cities[newCity.city] = newCity.state;
+  
+  response.status(201).json(newCity.name);
+});
   
 app.param('city', function(request, response, next){
   var city = request.params.city;
