@@ -10,11 +10,16 @@ app.use(express.static('public'));
 var cities = {
     'Providence': 'Rhode Island', 
     'Boston': 'Massachusetts',
-    'Portland': 'Oregon',
-    'San Diego': 'California',
-    'Austin': 'Texas'
+    'Portland': 'Maine',
+    'Austin': 'Texas',
+    'Oakland': 'California'
   };
   
+app.delete('/cities/:city', function(request, response){
+  delete cities[request.cityNameFixed];
+  response.sendStatus(200);
+});
+
 app.post('/cities', parseUrlencoded, function(request, response){
   var newCity = request.body;
   cities[newCity.city] = newCity.state;
