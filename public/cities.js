@@ -8,10 +8,12 @@ $(function(){
         var cityData = form.serialize();
         
     $.ajax({
-        type: 'POST', url: '/cities', data: cityData
+        type: 'POST', 
+        url: '/cities', 
+        data: cityData
         }).done(function(cityNameFixed){
         appendToList([cityNameFixed]);
-        form.trigger('reset');
+        this.trigger('reset');
         });
     });
     
@@ -23,7 +25,8 @@ $(function(){
         var target = $(event.currentTarget);
         
         $.ajax({
-            type: 'DELETE', url: '/cities/' + target.data('city')
+            type: 'DELETE', 
+            url: '/cities/' + target.data('city')
         }).done(function() {
             target.parents('li').remove();
         });

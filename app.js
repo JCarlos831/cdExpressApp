@@ -21,10 +21,11 @@ app.delete('/cities/:city', function(request, response){
 });
 
 app.post('/cities', parseUrlencoded, function(request, response){
+  if(request.body.city.length > 4 && request.body.state.length > 2){
   var newCity = request.body;
   cities[newCity.city] = newCity.state;
-  
   response.status(201).json(newCity.name);
+  }
 });
   
 app.param('city', function(request, response, next){
