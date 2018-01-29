@@ -1,18 +1,61 @@
 var express = require('express');
 var app = express();
 var portNum = process.env.PORT;
+var currentDate = new Date();
 
 app.use(express.static('public'));
 
-app.get('/cities', function(request, response) {
-  var cities = ['Providence', 'Boston', 'Portland', 'San Diego', 'Austin'];
-  if(request.query.limit > cities.length){
+var cities = {
+    'Providence': 'Rhode Island', 
+    'Boston': 'Massachusetts',
+    'Portland': 'Oregon',
+    'San Diego': 'California',
+    'Austin': 'Texas'
+  };
+  
+app.param('city', function(request, response, next){
+  var city = request.params.city;
+  var cityName = city[0].toUpperCase() + city.slice(1).toLowerCase();
+  
+  request.cityNameFixed = cityName;
+  
+  next();
+});
+
+app.get('/cities', function(request, response){
+    if(request.query.limit > cities.length){
     response.status(404).json("Error");
   } else if(request.query.limit > 0) {
-    response.json(cities.slice(0, request.query.limit));
+    response.json(Object.keys(cities).slice(0, request.query.limit));
   } else {
-    response.json(cities);
+    response.json(Object.keys(cities));
   }
+});
+
+app.get('/cities/:city', function(request, response) {
+  var state = cities[request.cityNameFixed];
+  
+  if(!state){
+    response.status(404).json('There are no results for ' + request.params.city);
+  }else{
+    response.json(state);
+  }
+});
+
+app.get('/name', function(request, response) {
+    response.send("Juan Montoya");
+});
+
+app.get('/redirect', function(request, response){
+  response.redirect(301, '/surprise');
+});
+
+app.get('/surprise', function(request, response){
+    response.send("SURPRISE!!!");
+});
+
+app.get('/date', function(request, response){
+    response.send(currentDate);
 });
 
 app.listen(portNum);
