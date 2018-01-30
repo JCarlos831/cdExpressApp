@@ -2,10 +2,10 @@ var express = require('express');
 var app = express();
 var portNum = process.env.PORT;
 var currentDate = new Date();
+var cityRoutes = require('./routes/cityRoutes');
 
 app.use(express.static('public'));
 
-var cityRoutes = require('./routes/cityRoutes');
 app.use('/cities', cityRoutes);
   
 app.get('/name', function(request, response) {

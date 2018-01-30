@@ -29,7 +29,7 @@ var cities = {
     }
   });
   
-  router.route('/:name')
+  router.route('/:city')
     .all(function(request, response, next){
     var city = request.params.city;
     var cityName = city[0].toUpperCase() + city.slice(1).toLowerCase();
