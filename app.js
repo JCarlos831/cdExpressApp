@@ -1,9 +1,16 @@
 var express = require('express');
 var app = express();
+<<<<<<< HEAD
+=======
+var portNum = process.env.PORT;
+var currentDate = new Date();
+var cityRoutes = require('./routes/cityRoutes');
+>>>>>>> level5
 
 <<<<<<< HEAD
 app.use(express.static('public'));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 app.get('/name', function(request, response) {
     response.send("Juan Montoya");
@@ -76,6 +83,12 @@ app.use(express.static('public'));
 app.get('/cities', function(request, response){
   var cities = ['Providence', 'Warwick', 'Pawtucket', 'Central Falls', 'Cumberland'];
   response.json(cities);
+=======
+app.use('/cities', cityRoutes);
+  
+app.get('/name', function(request, response) {
+    response.send("Juan Montoya");
+>>>>>>> level5
 });
 
 app.get('/index', function(request, response){
