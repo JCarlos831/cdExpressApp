@@ -1,8 +1,7 @@
 var express = require('express');
 var app = express();
-var portNum = process.env.PORT;
-var currentDate = new Date();
 
+<<<<<<< HEAD
 app.use(express.static('public'));
 
 <<<<<<< HEAD
@@ -41,17 +40,18 @@ app.param('city', function(request, response, next){
   
   next();
 });
+=======
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({extended: false});
+>>>>>>> level4
 
-app.get('/cities', function(request, response){
-    if(request.query.limit > cities.length){
-    response.status(404).json("Error");
-  } else if(request.query.limit > 0) {
-    response.json(Object.keys(cities).slice(0, request.query.limit));
-  } else {
-    response.json(Object.keys(cities));
-  }
-});
+var blocks = {
+    'Fixed': 'Fastened securely in position',
+    'Movable': 'Capable of being moved',
+    'Rotating': 'Moving in a circle around its center'
+};
 
+<<<<<<< HEAD
 app.get('/cities/:city', function(request, response) {
   var state = cities[request.cityNameFixed];
   
@@ -61,12 +61,17 @@ app.get('/cities/:city', function(request, response) {
     response.json(state);
   }
 >>>>>>> level3
+=======
+app.post('/blocks', parseUrlencoded, function(request, response) {
+    var newBlock = request.body;
+    blocks[newBlock.name] = newBlock.description;
+    response.status(201).json(newBlock.name);
+>>>>>>> level4
 });
 
-app.get('/name', function(request, response) {
-    response.send("Juan Montoya");
-});
+app.use(express.static('public'));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 app.get('/cities', function(request, response){
   var cities = ['Providence', 'Warwick', 'Pawtucket', 'Central Falls', 'Cumberland'];
@@ -78,15 +83,41 @@ app.get('/index', function(request, response){
 =======
 app.get('/redirect', function(request, response){
   response.redirect(301, '/surprise');
+=======
+app.param('name', function(request, response, next) {
+    var name = request.params.name;
+    var block = name[0].toUpperCase() + name.slice(1).toLowerCase();
+    
+    request.blockName = block;
+    
+    next();
+>>>>>>> level4
 });
 
-app.get('/surprise', function(request, response){
-    response.send("SURPRISE!!!");
+app.get('/blocks', function(request, response) {
+    response.json(Object.keys(blocks));
 });
 
+<<<<<<< HEAD
 app.get('/date', function(request, response){
     response.send(currentDate);
 >>>>>>> level3
+=======
+app.get('/blocks/:name', function(request, response){
+    var description = blocks[request.blockName];
+    
+    if (!description) {
+        response.status(404).json('No description found for ' + request.params.name);
+    } else {
+        response.json(description);
+    }
+    
+    if (request.query.limit >= 0) {
+        response.json(blocks.slice(0, request.query.limit));
+    } else {
+        response.json(blocks);
+    }
+>>>>>>> level4
 });
 
-app.listen(portNum);
+app.listen(process.env.PORT);

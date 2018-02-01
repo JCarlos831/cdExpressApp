@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/JCarlos831/cdExpressApp/issues"
   },
-  "homepage": "https://github.com/JCarlos831/cdExpressApp#readme"
+  "homepage": "https://github.com/JCarlos831/cdExpressApp#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2"
+  }
 }
